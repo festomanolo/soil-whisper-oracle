@@ -176,6 +176,7 @@ const SoilHealthMetrics = () => {
             <div className="absolute inset-0 flex items-center justify-center text-xs font-medium">N</div>
           </div>
           <span className="text-xs mt-1">Nitrogen</span>
+          <span className="text-xs text-muted-foreground">{soilHealth.nitrogen.toFixed(1)}%</span>
         </div>
         
         <div className="flex flex-col items-center">
@@ -198,6 +199,7 @@ const SoilHealthMetrics = () => {
             <div className="absolute inset-0 flex items-center justify-center text-xs font-medium">P</div>
           </div>
           <span className="text-xs mt-1">Phosphorus</span>
+          <span className="text-xs text-muted-foreground">{soilHealth.phosphorus.toFixed(1)}%</span>
         </div>
         
         <div className="flex flex-col items-center">
@@ -220,6 +222,7 @@ const SoilHealthMetrics = () => {
             <div className="absolute inset-0 flex items-center justify-center text-xs font-medium">K</div>
           </div>
           <span className="text-xs mt-1">Potassium</span>
+          <span className="text-xs text-muted-foreground">{soilHealth.potassium.toFixed(1)}%</span>
         </div>
         
         <div className="flex flex-col items-center">
@@ -242,6 +245,7 @@ const SoilHealthMetrics = () => {
             <div className="absolute inset-0 flex items-center justify-center text-xs font-medium">O₂</div>
           </div>
           <span className="text-xs mt-1">Oxygen</span>
+          <span className="text-xs text-muted-foreground">{soilHealth.oxygen.toFixed(1)}%</span>
         </div>
       </div>
     </div>
