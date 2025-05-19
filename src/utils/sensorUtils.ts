@@ -31,7 +31,7 @@ export const getPHColorClass = (ph: number): string => {
 /**
  * Get color for nutrient level
  */
-export const getNutrientColorClass = (nutrient: 'nitrogen' | 'phosphorus' | 'potassium' | 'oxygen', value: number): string => {
+export const getNutrientColorClass = (nutrient: 'nitrogen' | 'phosphorus' | 'potassium' | 'conductivity', value: number): string => {
   let baseColor: string;
   
   switch (nutrient) {
@@ -44,8 +44,8 @@ export const getNutrientColorClass = (nutrient: 'nitrogen' | 'phosphorus' | 'pot
     case 'potassium':
       baseColor = 'bg-nutrient-potassium';
       break;
-    case 'oxygen':
-      baseColor = 'bg-nutrient-oxygen';
+    case 'conductivity':
+      baseColor = 'bg-nutrient-oxygen'; // Reusing the oxygen color class for conductivity
       break;
     default:
       baseColor = 'bg-gray-400';

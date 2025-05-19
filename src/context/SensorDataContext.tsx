@@ -7,7 +7,7 @@ export type SoilHealthData = {
   nitrogen: number; // 0-100%
   phosphorus: number; // 0-100%
   potassium: number; // 0-100%
-  oxygen: number; // 0-100%
+  conductivity: number; // 0-100%
   ph: number; // 0-14 scale
   temperature: number; // Celsius
 };
@@ -34,7 +34,7 @@ const defaultSoilHealth: SoilHealthData = {
   nitrogen: 42,
   phosphorus: 31,
   potassium: 58,
-  oxygen: 76,
+  conductivity: 76,
   ph: 6.8,
   temperature: 22,
 };
@@ -96,7 +96,7 @@ export const SensorDataProvider = ({ children }: SensorDataProviderProps) => {
         nitrogen: getRandomVariation(prev.nitrogen, 2),
         phosphorus: getRandomVariation(prev.phosphorus, 2),
         potassium: getRandomVariation(prev.potassium, 2),
-        oxygen: getRandomVariation(prev.oxygen, 3),
+        conductivity: getRandomVariation(prev.conductivity, 3),
         ph: Math.max(3, Math.min(10, prev.ph + (Math.random() * 0.4 - 0.2))),
         temperature: Math.max(10, Math.min(35, prev.temperature + (Math.random() * 1 - 0.5))),
       }));

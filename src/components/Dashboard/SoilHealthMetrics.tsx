@@ -239,13 +239,13 @@ const SoilHealthMetrics = () => {
                 fill="none"
                 stroke="#29B6F6"
                 strokeWidth="3"
-                strokeDasharray={`${soilHealth.oxygen}, 100`}
+                strokeDasharray={`${soilHealth.conductivity}, 100`}
               />
             </svg>
-            <div className="absolute inset-0 flex items-center justify-center text-xs font-medium">O₂</div>
+            <div className="absolute inset-0 flex items-center justify-center text-xs font-medium">EC</div>
           </div>
-          <span className="text-xs mt-1">Oxygen</span>
-          <span className="text-xs text-muted-foreground">{soilHealth.oxygen.toFixed(1)}%</span>
+          <span className="text-xs mt-1">Conductivity</span>
+          <span className="text-xs text-muted-foreground">{soilHealth.conductivity.toFixed(1)}%</span>
         </div>
       </div>
     </div>
