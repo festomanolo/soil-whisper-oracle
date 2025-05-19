@@ -18,6 +18,12 @@ npm i
 
 # Step 4: Start the development server with auto-reloading and an instant preview.
 npm run dev
+
+Run npm install to install dependencies
+Run npx cap add android to add the Android platform
+Run npm run build to build the web app
+Run npx cap sync to sync the build with the Android project
+Run npx cap open android to open in Android Studio or npx cap run android to run directly on a connected device
 ```
 
 **Edit a file directly in GitHub**
