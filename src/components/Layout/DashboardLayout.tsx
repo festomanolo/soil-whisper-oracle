@@ -2,6 +2,7 @@
 import React, { ReactNode, useEffect } from 'react';
 import ThemeToggle from '../UI/ThemeToggle';
 import { Leaf } from 'lucide-react';
+import MobileStatusBar from '../Mobile/MobileStatusBar';
 
 interface DashboardLayoutProps {
   children: ReactNode;
@@ -43,6 +44,9 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
 
   return (
     <div className="min-h-screen bg-background soil-background">
+      {/* Mobile Status Bar - Only shown on mobile devices */}
+      <MobileStatusBar />
+      
       {/* Header */}
       <header className="border-b border-border p-4">
         <div className="container mx-auto flex justify-between items-center">
