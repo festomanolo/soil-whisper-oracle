@@ -1,0 +1,41 @@
+
+{
+  "android": {
+    "compileSdkVersion": 34,
+    "targetSdkVersion": 34,
+    "minSdkVersion": 24,
+    "buildToolsVersion": "34.0.0",
+    "gradle": {
+      "distributionUrl": "https://services.gradle.org/distributions/gradle-8.4-bin.zip"
+    },
+    "proguardFiles": [
+      "proguard-android-optimize.txt",
+      "proguard-rules.pro"
+    ],
+    "signing": {
+      "storeFile": null,
+      "storePassword": null,
+      "keyAlias": null,
+      "keyPassword": null
+    },
+    "buildTypes": {
+      "release": {
+        "minifyEnabled": true,
+        "shrinkResources": true,
+        "zipAlignEnabled": true,
+        "debuggable": false
+      },
+      "debug": {
+        "minifyEnabled": false,
+        "shrinkResources": false,
+        "zipAlignEnabled": false,
+        "debuggable": true
+      }
+    },
+    "permissions": [
+      "android.permission.INTERNET",
+      "android.permission.ACCESS_NETWORK_STATE",
+      "android.permission.WAKE_LOCK"
+    ]
+  }
+}

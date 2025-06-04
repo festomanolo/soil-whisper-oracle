@@ -2,8 +2,8 @@
 import { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'app.lovable.2075fd8ebb7b407491b599fe88577e65',
-  appName: 'soil-whisper-oracle',
+  appId: 'app.lovable.soilwhispereroracle',
+  appName: 'AgriOracle - Soil Whisperer',
   webDir: 'dist',
   server: {
     url: 'https://2075fd8e-bb7b-4074-91b5-99fe88577e65.lovableproject.com?forceHideBadge=true',
@@ -11,12 +11,39 @@ const config: CapacitorConfig = {
   },
   android: {
     buildOptions: {
-      keystorePath: null,
-      keystoreAlias: null,
-      keystorePassword: null,
-      keystoreAliasPassword: null,
-      releaseType: null,
-      signingType: null
+      keystorePath: undefined,
+      keystoreAlias: undefined,
+      keystorePassword: undefined,
+      keystoreAliasPassword: undefined,
+      releaseType: 'APK',
+      signingType: 'apksigner'
+    },
+    minWebViewVersion: 60,
+    allowMixedContent: true,
+    captureInput: true,
+    webContentsDebuggingEnabled: false,
+    appendUserAgent: 'AgriOracle/1.0',
+    overrideUserAgent: undefined,
+    backgroundColor: '#1d1915',
+    useLegacyBridge: false,
+    flavor: 'main'
+  },
+  plugins: {
+    SplashScreen: {
+      launchShowDuration: 2000,
+      backgroundColor: '#1d1915',
+      showSpinner: false,
+      androidSpinnerStyle: 'large',
+      spinnerColor: '#22c55e'
+    },
+    StatusBar: {
+      style: 'dark',
+      backgroundColor: '#1d1915'
+    },
+    Keyboard: {
+      resize: 'body',
+      style: 'dark',
+      resizeOnFullScreen: true
     }
   }
 };
