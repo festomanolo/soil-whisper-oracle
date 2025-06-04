@@ -32,16 +32,32 @@ class ESP32Service {
     localStorage.setItem('esp32_ip', ip);
   }
 
+  private async fetchWithTimeout(url: string, options: RequestInit, timeoutMs: number): Promise<Response> {
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), timeoutMs);
+
+    try {
+      const response = await fetch(url, {
+        ...options,
+        signal: controller.signal,
+      });
+      clearTimeout(timeoutId);
+      return response;
+    } catch (error) {
+      clearTimeout(timeoutId);
+      throw error;
+    }
+  }
+
   public async connect(): Promise<boolean> {
     try {
       console.log(`Attempting to connect to ESP32 at ${this.esp32IP}`);
-      const response = await fetch(`http://${this.esp32IP}/status`, {
+      const response = await this.fetchWithTimeout(`http://${this.esp32IP}/status`, {
         method: 'GET',
-        timeout: 5000,
         headers: {
           'Content-Type': 'application/json',
         }
-      });
+      }, 5000);
 
       if (response.ok) {
         this.isConnected = true;
@@ -63,13 +79,12 @@ class ESP32Service {
     }
 
     try {
-      const response = await fetch(`http://${this.esp32IP}/sensor-data`, {
+      const response = await this.fetchWithTimeout(`http://${this.esp32IP}/sensor-data`, {
         method: 'GET',
-        timeout: 10000,
         headers: {
           'Content-Type': 'application/json',
         }
-      });
+      }, 10000);
 
       if (response.ok) {
         const data = await response.json();
