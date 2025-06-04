@@ -3,7 +3,7 @@ import React from 'react';
 import DashboardLayout from '../components/Layout/DashboardLayout';
 import SoilHealthMetrics from '../components/Dashboard/SoilHealthMetrics';
 import CropRecommendations from '../components/Dashboard/CropRecommendations';
-import SensorVisualizer from '../components/Dashboard/SensorVisualizer';
+import ESP32Connection from '../components/Dashboard/ESP32Connection';
 import { SensorDataProvider } from '../context/SensorDataContext';
 
 const Index = () => {
@@ -35,8 +35,8 @@ const Index = () => {
           
           {/* Sidebar Content */}
           <div className="space-y-6">
-            {/* Sensor Status */}
-            <SensorVisualizer />
+            {/* ESP32 Connection */}
+            <ESP32Connection />
             
             {/* Crop Recommendations */}
             <CropRecommendations />

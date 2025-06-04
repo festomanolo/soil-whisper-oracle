@@ -26,7 +26,8 @@ const config: CapacitorConfig = {
     overrideUserAgent: undefined,
     backgroundColor: '#1d1915',
     useLegacyBridge: false,
-    flavor: 'main'
+    flavor: 'main',
+    webSecurity: false
   },
   plugins: {
     SplashScreen: {

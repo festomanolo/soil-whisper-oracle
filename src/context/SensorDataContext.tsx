@@ -1,5 +1,6 @@
-
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import { esp32Service } from '../services/esp32Service';
+import { offlineStorage } from '../services/offlineStorage';
 
 // Define our sensor data types
 export type SoilHealthData = {
@@ -27,6 +28,9 @@ interface SensorContextType {
   lastUpdate: Date;
   refreshData: () => void;
   connectToSensor: () => void;
+  isOfflineMode: boolean;
+  esp32IP: string;
+  setESP32IP: (ip: string) => void;
 }
 
 const defaultSoilHealth: SoilHealthData = {
@@ -82,38 +86,77 @@ export const SensorDataProvider = ({ children }: SensorDataProviderProps) => {
   const [recommendedCrops, setRecommendedCrops] = useState<CropRecommendation[]>(defaultCropRecommendations);
   const [isConnected, setIsConnected] = useState(false);
   const [lastUpdate, setLastUpdate] = useState(new Date());
+  const [isOfflineMode, setIsOfflineMode] = useState(false);
+  const [esp32IP, setESP32IPState] = useState(esp32Service.getIP());
   
-  // Simulate data changes
-  const getRandomVariation = (base: number, range: number) => {
-    return Math.max(0, Math.min(100, base + (Math.random() * range * 2 - range)));
+  const setESP32IP = (ip: string) => {
+    esp32Service.setIP(ip);
+    setESP32IPState(ip);
+  };
+
+  const refreshData = async () => {
+    try {
+      // Try to get data from ESP32
+      const esp32Data = await esp32Service.getSensorData();
+      
+      if (esp32Data) {
+        const newSoilHealth: SoilHealthData = {
+          moisture: esp32Data.moisture,
+          nitrogen: esp32Data.nitrogen,
+          phosphorus: esp32Data.phosphorus,
+          potassium: esp32Data.potassium,
+          conductivity: esp32Data.conductivity,
+          ph: esp32Data.ph,
+          temperature: esp32Data.temperature,
+        };
+        
+        setSoilHealth(newSoilHealth);
+        setIsConnected(true);
+        setIsOfflineMode(false);
+        setLastUpdate(new Date());
+        
+        // Save to offline storage
+        offlineStorage.saveSensorData(newSoilHealth);
+      } else {
+        // Fall back to offline mode
+        const offlineData = offlineStorage.getLatestSensorData();
+        if (offlineData) {
+          setSoilHealth(offlineData);
+          setIsOfflineMode(true);
+        } else {
+          // Use simulated data as last resort
+          setSoilHealth(prev => ({
+            moisture: Math.max(0, Math.min(100, prev.moisture + (Math.random() * 6 - 3))),
+            nitrogen: Math.max(0, Math.min(100, prev.nitrogen + (Math.random() * 4 - 2))),
+            phosphorus: Math.max(0, Math.min(100, prev.phosphorus + (Math.random() * 4 - 2))),
+            potassium: Math.max(0, Math.min(100, prev.potassium + (Math.random() * 4 - 2))),
+            conductivity: Math.max(0, Math.min(100, prev.conductivity + (Math.random() * 6 - 3))),
+            ph: Math.max(3, Math.min(10, prev.ph + (Math.random() * 0.4 - 0.2))),
+            temperature: Math.max(10, Math.min(35, prev.temperature + (Math.random() * 1 - 0.5))),
+          }));
+          setIsOfflineMode(true);
+        }
+        setIsConnected(false);
+        setLastUpdate(new Date());
+      }
+    } catch (error) {
+      console.error('Error refreshing data:', error);
+      setIsConnected(false);
+      setIsOfflineMode(true);
+    }
   };
   
-  const refreshData = () => {
-    // In a real app, this would fetch from the ESP32
-    setTimeout(() => {
-      setSoilHealth(prev => ({
-        moisture: getRandomVariation(prev.moisture, 3),
-        nitrogen: getRandomVariation(prev.nitrogen, 2),
-        phosphorus: getRandomVariation(prev.phosphorus, 2),
-        potassium: getRandomVariation(prev.potassium, 2),
-        conductivity: getRandomVariation(prev.conductivity, 3),
-        ph: Math.max(3, Math.min(10, prev.ph + (Math.random() * 0.4 - 0.2))),
-        temperature: Math.max(10, Math.min(35, prev.temperature + (Math.random() * 1 - 0.5))),
-      }));
-      setLastUpdate(new Date());
-    }, 500);
-  };
-  
-  const connectToSensor = () => {
+  const connectToSensor = async () => {
     setIsConnected(false);
-    // Simulate connection process
-    setTimeout(() => {
-      setIsConnected(true);
-      refreshData();
-    }, 1500);
+    const connected = await esp32Service.connect();
+    if (connected) {
+      await refreshData();
+    } else {
+      setIsOfflineMode(true);
+    }
   };
   
-  // Auto-refresh data every 10 seconds
+  // Auto-refresh data every 10 seconds when connected
   useEffect(() => {
     if (!isConnected) return;
     
@@ -121,7 +164,7 @@ export const SensorDataProvider = ({ children }: SensorDataProviderProps) => {
     return () => clearInterval(intervalId);
   }, [isConnected]);
   
-  // Simulate initial connection on mount
+  // Try to connect on mount
   useEffect(() => {
     connectToSensor();
   }, []);
@@ -135,6 +178,9 @@ export const SensorDataProvider = ({ children }: SensorDataProviderProps) => {
         lastUpdate,
         refreshData,
         connectToSensor,
+        isOfflineMode,
+        esp32IP,
+        setESP32IP,
       }}
     >
       {children}

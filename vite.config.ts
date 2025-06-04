@@ -20,7 +20,7 @@ export default defineConfig(({ mode }) => ({
       "@": path.resolve(__dirname, "./src"),
     },
   },
-  // Ensure proper mobile support
+  // Ensure proper mobile and offline support
   build: {
     outDir: 'dist',
     rollupOptions: {
@@ -35,5 +35,9 @@ export default defineConfig(({ mode }) => ({
         }
       }
     }
-  }
+  },
+  define: {
+    __SW__: mode === 'production'
+  },
+  publicDir: 'public'
 }));

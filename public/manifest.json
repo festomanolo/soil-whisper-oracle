@@ -1,0 +1,19 @@
+
+{
+  "name": "AgriOracle - Soil Whisperer",
+  "short_name": "AgriOracle",
+  "description": "AI-powered soil analysis and crop recommendations",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#1d1915",
+  "theme_color": "#22c55e",
+  "orientation": "portrait",
+  "categories": ["agriculture", "productivity", "utilities"],
+  "icons": [
+    {
+      "src": "/favicon.ico",
+      "sizes": "64x64 32x32 24x24 16x16",
+      "type": "image/x-icon"
+    }
+  ]
+}
