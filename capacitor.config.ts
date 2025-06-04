@@ -27,11 +27,14 @@ const config: CapacitorConfig = {
     backgroundColor: '#1d1915',
     useLegacyBridge: false,
     flavor: 'main',
-    webSecurity: false
+    webSecurity: false,
+    // Optimize for faster loading
+    loggingBehavior: 'none',
+    mixedContentMode: 'always_allow'
   },
   plugins: {
     SplashScreen: {
-      launchShowDuration: 2000,
+      launchShowDuration: 1500, // Reduced splash time
       backgroundColor: '#1d1915',
       showSpinner: false,
       androidSpinnerStyle: 'large',
