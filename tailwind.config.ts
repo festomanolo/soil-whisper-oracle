@@ -63,32 +63,32 @@ export default {
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
 				},
-				// AgriOracle custom colors
+				// Mbolea Sahihi custom colors – all within the green family
 				soil: {
-					DEFAULT: '#5D4037',
-					dark: '#3E2723',
-					light: '#8D6E63',
+					DEFAULT: '#3f5f45',
+					dark: '#1f3a28',
+					light: '#6b8f71',
 				},
 				foliage: {
-					DEFAULT: '#2E7D32',
-					dark: '#1B5E20',
-					light: '#4CAF50',
+					DEFAULT: '#15803d',
+					dark: '#14532d',
+					light: '#22c55e',
 				},
 				nutrient: {
-					nitrogen: '#388E3C',
-					phosphorus: '#1976D2',
-					potassium: '#FFA000',
-					oxygen: '#29B6F6',
+					nitrogen: '#15803d',
+					phosphorus: '#059669',
+					potassium: '#65a30d',
+					oxygen: '#10b981',
 					ph: {
-						acidic: '#F44336',
-						neutral: '#9E9E9E',
-						alkaline: '#673AB7',
+						acidic: '#a3e635',
+						neutral: '#22c55e',
+						alkaline: '#047857',
 					},
 				},
 				moisture: {
-					dry: '#D84315',
-					moist: '#0288D1',
-					wet: '#01579B',
+					dry: '#bef264',
+					moist: '#34d399',
+					wet: '#047857',
 				},
 			},
 			borderRadius: {
@@ -137,7 +137,7 @@ export default {
 			},
 			backgroundImage: {
 				'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-				'gradient-soil': 'linear-gradient(to bottom, #3E2723, #5D4037)',
+				'gradient-soil': 'linear-gradient(to bottom, #14532d, #15803d)',
 			},
 		}
 	},

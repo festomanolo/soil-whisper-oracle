@@ -1,97 +1,106 @@
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
   :root {
-    --background: 24 33% 97%;
-    --foreground: 20 14.3% 4.1%;
+    /* Mbolea Sahihi – green palette. Every hue in the app derives from
+       these tokens or from Tailwind's green / emerald / lime scales. */
+    --background: 120 25% 97%;
+    --foreground: 150 30% 8%;
 
     --card: 0 0% 100%;
-    --card-foreground: 20 14.3% 4.1%;
+    --card-foreground: 150 30% 8%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 20 14.3% 4.1%;
+    --popover-foreground: 150 30% 8%;
 
-    --primary: 142 71% 45%;
-    --primary-foreground: 144 61% 98%;
+    --primary: 142 76% 36%;
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 30 94% 92%;
-    --secondary-foreground: 30 24% 26%;
+    --secondary: 138 60% 94%;
+    --secondary-foreground: 145 60% 20%;
 
-    --muted: 20 5.9% 90%;
-    --muted-foreground: 20 3.8% 40%;
+    --muted: 120 14% 92%;
+    --muted-foreground: 150 8% 36%;
 
-    --accent: 24 100% 90%;
-    --accent-foreground: 24 45% 26%;
+    --accent: 141 79% 90%;
+    --accent-foreground: 145 63% 20%;
 
-    --destructive: 0 84.2% 60.2%;
+    --destructive: 0 72% 51%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 20 5.9% 85%;
-    --input: 20 5.9% 85%;
-    --ring: 142 71% 45%;
+    --border: 130 16% 86%;
+    --input: 130 16% 86%;
+    --ring: 142 76% 36%;
 
     --radius: 0.75rem;
 
-    --sidebar-background: 30 20% 95%;
-    --sidebar-foreground: 20 14.3% 4.1%;
-    --sidebar-primary: 142 71% 45%;
-    --sidebar-primary-foreground: 144 61% 98%;
-    --sidebar-accent: 30 94% 92%;
-    --sidebar-accent-foreground: 30 24% 26%;
-    --sidebar-border: 20 5.9% 80%;
-    --sidebar-ring: 142 71% 45%;
+    --sidebar-background: 120 20% 95%;
+    --sidebar-foreground: 150 30% 8%;
+    --sidebar-primary: 142 76% 36%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 138 60% 94%;
+    --sidebar-accent-foreground: 145 60% 20%;
+    --sidebar-border: 130 16% 82%;
+    --sidebar-ring: 142 76% 36%;
   }
 
   .dark {
-    --background: 20 14.3% 8%;
-    --foreground: 0 0% 95%;
+    --background: 150 25% 6%;
+    --foreground: 120 12% 94%;
 
-    --card: 20 14.3% 12%;
-    --card-foreground: 0 0% 95%;
+    --card: 150 20% 9%;
+    --card-foreground: 120 12% 94%;
 
-    --popover: 20 14.3% 12%;
-    --popover-foreground: 0 0% 95%;
+    --popover: 150 20% 9%;
+    --popover-foreground: 120 12% 94%;
 
-    --primary: 142 76% 36%;
-    --primary-foreground: 144 61% 98%;
+    --primary: 142 69% 45%;
+    --primary-foreground: 150 40% 6%;
 
-    --secondary: 30 24% 26%;
-    --secondary-foreground: 0 0% 98%;
+    --secondary: 150 22% 15%;
+    --secondary-foreground: 120 12% 94%;
 
-    --muted: 20 14.3% 18%;
-    --muted-foreground: 20 5% 65%;
+    --muted: 150 15% 14%;
+    --muted-foreground: 140 8% 64%;
 
-    --accent: 22 64% 24%;
-    --accent-foreground: 0 0% 98%;
+    --accent: 145 35% 18%;
+    --accent-foreground: 140 60% 88%;
 
-    --destructive: 0 62.8% 30.6%;
+    --destructive: 0 62.8% 40%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 20 14.3% 14%;
-    --input: 20 14.3% 14%;
-    --ring: 142 76% 36%;
+    --border: 150 15% 17%;
+    --input: 150 15% 17%;
+    --ring: 142 69% 45%;
 
-    --sidebar-background: 20 14.3% 10%;
-    --sidebar-foreground: 0 0% 95%;
-    --sidebar-primary: 142 76% 36%;
-    --sidebar-primary-foreground: 144 61% 98%;
-    --sidebar-accent: 22 64% 24%;
-    --sidebar-accent-foreground: 0 0% 98%;
-    --sidebar-border: 20 14.3% 16%;
-    --sidebar-ring: 142 76% 36%;
+    --sidebar-background: 150 22% 8%;
+    --sidebar-foreground: 120 12% 94%;
+    --sidebar-primary: 142 69% 45%;
+    --sidebar-primary-foreground: 150 40% 6%;
+    --sidebar-accent: 145 35% 18%;
+    --sidebar-accent-foreground: 140 60% 88%;
+    --sidebar-border: 150 15% 17%;
+    --sidebar-ring: 142 69% 45%;
   }
 }
 
 @layer base {
+  html, body {
+    transition: background-color 0.5s cubic-bezier(0.4, 0, 0.2, 1), color 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  }
   * {
     @apply border-border;
   }
   body {
     @apply bg-background text-foreground;
     font-feature-settings: "rlig" 1, "calt" 1;
+  }
+
+  /* Smooth scrolling */
+  html {
+    scroll-behavior: smooth;
   }
 
   /* Custom scrollbar */
@@ -110,6 +119,11 @@
   ::-webkit-scrollbar-thumb:hover {
     @apply bg-muted-foreground;
   }
+}
+
+@layer utilities {
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+  .no-scrollbar { scrollbar-width: none; }
 }
 
 @layer components {
@@ -134,20 +148,406 @@
   }
 }
 
-/* Animated Soil Background with Particles */
-.soil-background {
-  position: relative;
+/* Animation Classes */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fillBar {
+  from { width: 0; }
+  to { width: 100%; }
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes fillProgress {
+  from { stroke-dasharray: 0, 100; }
+  to { stroke-dasharray: var(--target-value, 0), 100; }
+}
+
+@keyframes fillWidth {
+  from { width: 0%; }
+  to { width: var(--target-width, 0%); }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.5s ease-out forwards;
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.5s ease-out forwards;
+}
+
+.animate-fade-in-down {
+  animation: fadeInDown 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.animate-fade-in-left {
+  animation: fadeInLeft 0.5s ease-out forwards;
+}
+
+.animate-slide-in-right {
+  animation: slideInRight 0.5s ease-out forwards;
+}
+
+.animate-scale-in {
+  animation: scaleIn 0.5s ease-out forwards;
+}
+
+.animate-fill-progress {
+  animation: fillProgress 1.5s ease-out forwards;
+}
+
+.animate-fill-width {
+  animation: fillWidth 1.5s ease-out forwards;
+}
+
+.animate-fill-progress {
+  animation: fillBar 1.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.animate-pulse-subtle {
+  animation: pulse 2s infinite ease-in-out;
+}
+
+/* Staggered animations for lists */
+.stagger-animation > *:nth-child(1) { animation-delay: 0.1s; }
+.stagger-animation > *:nth-child(2) { animation-delay: 0.2s; }
+.stagger-animation > *:nth-child(3) { animation-delay: 0.3s; }
+.stagger-animation > *:nth-child(4) { animation-delay: 0.4s; }
+.stagger-animation > *:nth-child(5) { animation-delay: 0.5s; }
+
+/* Reveal on scroll animation variants */
+.reveal-on-scroll {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.reveal-on-scroll.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Analysis card animations */
+.analysis-card {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1), transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: opacity, transform;
+}
+
+.analysis-card.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Metric box animations */
+.metric-box {
+  opacity: 0;
+  transform: translateY(15px);
+  transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1), transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: opacity, transform;
+}
+
+.metric-box.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Progress bar animations */
+.progress-bar {
+  width: 0;
+  transition: width 1s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: width;
+}
+
+.progress-bar.revealed {
+  width: var(--width, 0%);
+}
+
+.reveal-on-scroll-left {
+  opacity: 0;
+  transform: translateX(-20px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.reveal-on-scroll-left.revealed {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.reveal-on-scroll-right {
+  opacity: 0;
+  transform: translateX(20px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.reveal-on-scroll-right.revealed {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.reveal-on-scroll-scale {
+  opacity: 0;
+  transform: scale(0.9);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.reveal-on-scroll-scale.revealed {
+  opacity: 1;
+  transform: scale(1);
+}
+
+@keyframes zoomInModal {
+  0% {
+    opacity: 0;
+    transform: scale(0.7);
+  }
+  60% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-zoom-in {
+  animation: zoomInModal 0.45s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.tahoe-modal-backdrop {
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(20px) saturate(1.2);
+  -webkit-backdrop-filter: blur(20px) saturate(1.2);
+  transition: all 0.2s ease-out;
+  animation: fadeIn 0.2s ease-out forwards;
+}
+
+.tahoe-glass {
+  background: rgba(255,255,255,0.25);
+  backdrop-filter: blur(30px) saturate(1.5) brightness(1.08);
+  -webkit-backdrop-filter: blur(30px) saturate(1.5) brightness(1.08);
+  border: 1.5px solid rgba(255,255,255,0.28);
+  box-shadow: 0 8px 32px 0 rgba(21,128,61,0.18);
+  transition: background 0.3s cubic-bezier(0.4,0,0.2,1), backdrop-filter 0.3s cubic-bezier(0.4,0,0.2,1);
+}
+/* macOS-style theme modal backdrop blur */
+body.theme-modal-open {
   overflow: hidden;
 }
 
-.soil-background::before {
+body.theme-modal-open::before {
   content: '';
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0) 100%);
-  z-index: -1;
+  background: rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(20px) saturate(1.2) brightness(0.95);
+  -webkit-backdrop-filter: blur(20px) saturate(1.2) brightness(0.95);
+  z-index: 9997;
   pointer-events: none;
+  animation: fadeIn 0.2s ease-out forwards;
+}
+
+.dark body.theme-modal-open::before {
+  background: rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(20px) saturate(1.1) brightness(0.9);
+  -webkit-backdrop-filter: blur(20px) saturate(1.1) brightness(0.9);
+}
+
+/* Enhanced theme dropdown styling */
+.theme-dropdown-enhanced {
+  background: rgba(255, 255, 255, 0.995) !important;
+  backdrop-filter: blur(50px) saturate(1.4) brightness(1.15) !important;
+  -webkit-backdrop-filter: blur(50px) saturate(1.4) brightness(1.15) !important;
+  border: 1px solid rgba(0, 0, 0, 0.04) !important;
+  box-shadow: 
+    0 30px 60px -15px rgba(0, 0, 0, 0.18),
+    0 20px 30px -10px rgba(0, 0, 0, 0.1),
+    0 0 0 1px rgba(255, 255, 255, 0.9) inset !important;
+  z-index: 9999999 !important;
+  position: relative !important;
+}
+
+.dark .theme-dropdown-enhanced {
+  background: rgba(23, 23, 23, 0.98) !important;
+  backdrop-filter: blur(50px) saturate(1.3) brightness(1.2) !important;
+  -webkit-backdrop-filter: blur(50px) saturate(1.3) brightness(1.2) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  box-shadow: 
+    0 30px 60px -15px rgba(0, 0, 0, 0.5),
+    0 20px 30px -10px rgba(0, 0, 0, 0.3),
+    0 0 0 1px rgba(255, 255, 255, 0.18) inset !important;
+  z-index: 9999999 !important;
+  position: relative !important;
+}/* En
+sure theme toggle container has proper z-index */
+.theme-toggle {
+  z-index: 9999999 !important;
+  position: relative !important;
+}
+
+/* Override any conflicting z-index rules */
+.theme-toggle .theme-dropdown-enhanced {
+  z-index: 9999999 !important;
+  position: absolute !important;
+}
+
+/* Enhanced sample dropdown styling - Mobile centered with reduced glass effect */
+.sample-dropdown-enhanced {
+  background: rgba(255, 255, 255, 0.95) !important;
+  backdrop-filter: blur(20px) saturate(1.3) brightness(1.08) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(1.3) brightness(1.08) !important;
+  border: 1px solid rgba(0, 0, 0, 0.06) !important;
+  box-shadow: 
+    0 20px 40px -10px rgba(0, 0, 0, 0.2),
+    0 10px 20px -5px rgba(0, 0, 0, 0.1),
+    0 0 0 1px rgba(255, 255, 255, 0.8) inset !important;
+  z-index: 99999999 !important;
+  position: fixed !important;
+  animation: modalSlideIn 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.dark .sample-dropdown-enhanced {
+  background: rgba(23, 23, 23, 0.95) !important;
+  backdrop-filter: blur(20px) saturate(1.2) brightness(1.1) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(1.2) brightness(1.1) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  box-shadow: 
+    0 20px 40px -10px rgba(0, 0, 0, 0.4),
+    0 10px 20px -5px rgba(0, 0, 0, 0.2),
+    0 0 0 1px rgba(255, 255, 255, 0.12) inset !important;
+  z-index: 99999999 !important;
+  position: fixed !important;
+}
+
+@keyframes modalSlideIn {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+/* Ensure sample dropdown container has ultra-high z-index */
+.sample-dropdown {
+  z-index: 99999999 !important;
+  position: relative !important;
+}
+
+/* Override any conflicting z-index rules for sample dropdown */
+.sample-dropdown .sample-dropdown-enhanced {
+  z-index: 99999999 !important;
+  position: absolute !important;
+}
+
+/* Liquid glass backdrop effect when sample dropdown is open */
+body.sample-dropdown-open {
+  overflow: hidden;
+}
+
+.liquid-glass-backdrop {
+  background: linear-gradient(135deg, 
+    rgba(255, 255, 255, 0.05) 0%,
+    rgba(255, 255, 255, 0.02) 25%,
+    rgba(255, 255, 255, 0.04) 50%,
+    rgba(255, 255, 255, 0.01) 75%,
+    rgba(255, 255, 255, 0.03) 100%
+  );
+  backdrop-filter: blur(6px) saturate(1.3) brightness(1.05);
+  -webkit-backdrop-filter: blur(6px) saturate(1.3) brightness(1.05);
+  animation: liquidGlassIn 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.dark .liquid-glass-backdrop {
+  background: linear-gradient(135deg, 
+    rgba(0, 0, 0, 0.08) 0%,
+    rgba(0, 0, 0, 0.04) 25%,
+    rgba(0, 0, 0, 0.06) 50%,
+    rgba(0, 0, 0, 0.03) 75%,
+    rgba(0, 0, 0, 0.05) 100%
+  );
+  backdrop-filter: blur(6px) saturate(1.2) brightness(0.98);
+  -webkit-backdrop-filter: blur(6px) saturate(1.2) brightness(0.98);
+}
+
+@keyframes liquidGlassIn {
+  0% {
+    opacity: 0;
+    backdrop-filter: blur(0px) saturate(1) brightness(1);
+    -webkit-backdrop-filter: blur(0px) saturate(1) brightness(1);
+  }
+  100% {
+    opacity: 1;
+    backdrop-filter: blur(6px) saturate(1.3) brightness(1.05);
+    -webkit-backdrop-filter: blur(6px) saturate(1.3) brightness(1.05);
+  }
 }
