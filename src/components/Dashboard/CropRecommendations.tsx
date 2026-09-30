@@ -1,16 +1,21 @@
-
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useSensorData } from '../../context/SensorDataContext';
 import { Leaf, AlertTriangle, Droplet } from 'lucide-react';
+import { animateNutrientCircles } from '../../utils/scrollReveal';
 
 const CropRecommendations = () => {
   const { recommendedCrops } = useSensorData();
 
+  // Run animation when component mounts
+  useEffect(() => {
+    animateNutrientCircles();
+  }, []);
+
   // Get color class based on confidence level
   const getConfidenceColor = (confidence: number) => {
     if (confidence >= 85) return "bg-green-500";
-    if (confidence >= 70) return "bg-yellow-500";
-    return "bg-orange-500";
+    if (confidence >= 70) return "bg-lime-500";
+    return "bg-lime-500";
   };
 
   // Get water requirement icons
@@ -19,25 +24,25 @@ const CropRecommendations = () => {
       case 'low':
         return (
           <div className="flex items-center">
-            <Droplet size={14} className="text-blue-400 fill-blue-400 opacity-40" />
-            <Droplet size={14} className="text-blue-400 opacity-30" />
-            <Droplet size={14} className="text-blue-400 opacity-30" />
+            <Droplet size={14} className="text-emerald-400 fill-emerald-400 opacity-40" />
+            <Droplet size={14} className="text-emerald-400 opacity-30" />
+            <Droplet size={14} className="text-emerald-400 opacity-30" />
           </div>
         );
       case 'moderate':
         return (
           <div className="flex items-center">
-            <Droplet size={14} className="text-blue-400 fill-blue-400" />
-            <Droplet size={14} className="text-blue-400 fill-blue-400" />
-            <Droplet size={14} className="text-blue-400 opacity-30" />
+            <Droplet size={14} className="text-emerald-400 fill-emerald-400" />
+            <Droplet size={14} className="text-emerald-400 fill-emerald-400" />
+            <Droplet size={14} className="text-emerald-400 opacity-30" />
           </div>
         );
       case 'high':
         return (
           <div className="flex items-center">
-            <Droplet size={14} className="text-blue-400 fill-blue-400" />
-            <Droplet size={14} className="text-blue-400 fill-blue-400" />
-            <Droplet size={14} className="text-blue-400 fill-blue-400" />
+            <Droplet size={14} className="text-emerald-400 fill-emerald-400" />
+            <Droplet size={14} className="text-emerald-400 fill-emerald-400" />
+            <Droplet size={14} className="text-emerald-400 fill-emerald-400" />
           </div>
         );
       default:
@@ -46,7 +51,7 @@ const CropRecommendations = () => {
   };
 
   return (
-    <div className="card-glass p-5 animate-fade-in-up">
+    <div className="card-glass rounded-[28px] backdrop-blur-md shadow-2xl p-5 reveal-on-scroll">
       <div className="flex items-center justify-between mb-4">
         <h2 className="text-lg font-semibold">Crop Recommendations</h2>
         <div className="bg-primary px-2 py-0.5 rounded-full text-xs font-medium text-primary-foreground flex items-center">
@@ -55,11 +60,11 @@ const CropRecommendations = () => {
         </div>
       </div>
       
-      <div className="space-y-4">
+      <div className="space-y-4 stagger-animation">
         {recommendedCrops.map((crop, index) => (
           <div 
             key={crop.name} 
-            className={`bg-muted/60 rounded-lg p-4 ${index === 0 ? 'border-2 border-primary' : ''}`}
+            className={`bg-muted/60 rounded-[20px] shadow-lg p-4 ${index === 0 ? 'border-2 border-primary' : ''} reveal-on-scroll`}
           >
             <div className="flex justify-between items-start">
               <div>
@@ -94,7 +99,7 @@ const CropRecommendations = () => {
             
             <div className="mt-3 pt-3 border-t border-border">
               <h4 className="text-sm font-medium flex items-center mb-2">
-                <AlertTriangle size={14} className="text-amber-500 mr-1" />
+                <AlertTriangle size={14} className="text-lime-500 mr-1" />
                 Soil Enrichment Required
               </h4>
               <ul className="list-disc list-inside text-sm space-y-1 text-muted-foreground pl-1">
@@ -104,7 +109,7 @@ const CropRecommendations = () => {
               </ul>
             </div>
 
-            <button className="mt-3 w-full py-1.5 bg-accent hover:bg-accent/80 text-accent-foreground rounded-md text-sm font-medium transition-colors">
+            <button className="mt-3 w-full py-1.5 bg-accent hover:bg-accent/80 text-accent-foreground rounded-[14px] text-sm font-medium transition-colors">
               Select This Crop
             </button>
           </div>
