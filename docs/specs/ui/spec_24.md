@@ -1,0 +1,16 @@
+# Specification 24: Add Separator Horizontal And Vertical Divider Primitive
+
+**Scope**: `ui`  
+**Stage**: `7/16`  
+**Component**: Mbolea Sahihi Architecture  
+
+## Overview
+Technical specification and implementation details for add separator horizontal and vertical divider primitive.
+
+## Requirements & Invariants
+- Enforce strict type safety and agricultural accuracy for ui.
+- Support offline execution without cloud dependency.
+- Validate inputs against real Tanzanian regional datasets.
+
+## Verification
+- Automated verification and unit assertions for add separator horizontal and vertical divider primitive.
