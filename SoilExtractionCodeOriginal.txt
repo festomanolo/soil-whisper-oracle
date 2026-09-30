@@ -1,0 +1,235 @@
+#include <SoftwareSerial.h>
+#include<LiquidCrystal_I2C.h>
+#include <ESP8266WiFi.h>
+#include <Wire.h> 
+#include <ESP8266WebServer.h>
+                                                        
+SoftwareSerial mySerial(D5, D6); 
+
+LiquidCrystal_I2C lcd(0x27,20,4);
+
+char status;
+WiFiClient client;
+ESP8266WebServer server(80);
+
+String apiKey = "78FKA1RFIEUZGBZF";                     // https://thingspeak.mathworks.com/channels/2828977
+const char *ssid =  "SOIL";
+const char *pass =  "123456789p";
+const char* serverName = "api.thingspeak.com";
+
+ #define RE D3         
+ #define DE D4
+
+
+unsigned long previousMillis = 0; 
+const unsigned long clearInterval = 5000;
+
+float lastSoilTemperature = 0;
+float lastSoilHumidity = 0;
+int lastSoilConductivity = 0;
+float lastSoilPH = 0;
+int lastNitrogen = 0;
+int lastPhosphorus = 0;
+int lastPotassium = 0;
+
+void handleRoot() {
+  String json = "{";
+  json += "\"temperature\":" + String(lastSoilTemperature, 1) + ",";
+  json += "\"humidity\":" + String(lastSoilHumidity, 1) + ",";
+  json += "\"conductivity\":" + String(lastSoilConductivity) + ",";
+  json += "\"ph\":" + String(lastSoilPH, 1) + ",";
+  json += "\"nitrogen\":" + String(lastNitrogen) + ",";
+  json += "\"phosphorus\":" + String(lastPhosphorus) + ",";
+  json += "\"potassium\":" + String(lastPotassium);
+  json += "}";
+  server.send(200, "application/json", json);
+}
+
+void setup() {
+  Serial.begin(9600);
+  mySerial.begin(4800);
+  Wire.begin();
+
+  pinMode(DE, OUTPUT);
+  pinMode(RE, OUTPUT);
+
+  lcd.init();                    
+  lcd.init();
+
+  lcd.backlight();
+  lcd.setCursor(7,0);
+  lcd.print("WELCOME");
+  lcd.setCursor(0,2);
+  lcd.print("SOIL DATA EXTRACTION");
+  delay(3000);
+  lcd.clear();
+
+  lcd.setCursor(0,0);
+  lcd.print("T : ");
+  lcd.setCursor(4,0);
+  lcd.print("0");
+  lcd.setCursor(8,0);
+  lcd.print("C");
+
+  lcd.setCursor(10,0);
+  lcd.print("H : ");
+  lcd.setCursor(14,0);
+  lcd.print("0");
+  lcd.setCursor(18,0);
+  lcd.print("%");
+
+  lcd.setCursor(0,1);
+  lcd.print("C : ");
+  lcd.setCursor(4,1);
+  lcd.print("0");
+
+  lcd.setCursor(10,1);
+  lcd.print("PH : ");
+  lcd.setCursor(14,1);
+  lcd.print("0");
+  lcd.setCursor(18,1);
+  lcd.print("%");
+
+  lcd.setCursor(0,2);
+  lcd.print("N : ");
+  lcd.setCursor(4,2);
+  lcd.print("0");
+
+  lcd.setCursor(10,2);
+  lcd.print("P : ");
+  lcd.setCursor(14,2);
+  lcd.print("0");
+
+  lcd.setCursor(0,3);
+  lcd.print("K : ");
+  lcd.setCursor(4,3);
+  lcd.print("0");
+
+  digitalWrite(DE, LOW);
+  digitalWrite(RE, LOW);
+
+  WiFi.begin(ssid, pass);
+
+
+  while (WiFi.status() != WL_CONNECTED) {
+    delay(500);
+    lcd.setCursor(10,3);
+    lcd.print("Connecting");
+  }
+  Serial.println("");
+  Serial.println("WiFi connected");
+
+  server.on("/", handleRoot);
+  server.begin();
+}
+
+void loop() {
+  unsigned long currentMillis = millis();
+
+  byte queryData[]{ 0x01, 0x03, 0x00, 0x00, 0x00, 0x07, 0x04, 0x08 };
+  byte receivedData[19];
+  digitalWrite(DE, HIGH);
+  digitalWrite(RE, HIGH);
+
+  mySerial.write(queryData, sizeof(queryData));  
+
+  digitalWrite(DE, LOW);
+  digitalWrite(RE, LOW);
+  delay(1000);
+
+  if (mySerial.available() >= sizeof(receivedData)) {        
+    mySerial.readBytes(receivedData, sizeof(receivedData));  
+    lastSoilHumidity = (float)((receivedData[3] << 8) | receivedData[4]) / 10.0;
+    lastSoilTemperature = (float)((receivedData[5] << 8) | receivedData[6]) / 10.0;
+    lastSoilConductivity = (receivedData[7] << 8) | receivedData[8];
+    lastSoilPH = (float)((receivedData[9] << 8) | receivedData[10]) / 10.0;
+    lastNitrogen = (receivedData[11] << 8) | receivedData[12];
+    lastPhosphorus = (receivedData[13] << 8) | receivedData[14];
+    lastPotassium = (receivedData[15] << 8) | receivedData[16];
+
+    Serial.print("Soil Humidity: ");
+    Serial.println((float)soilHumidity / 10.0);
+    Serial.print("Soil Temperature: ");
+    Serial.println((float)soilTemperature / 10.0);
+    Serial.print("Soil Conductivity: ");
+    Serial.println(soilConductivity);
+    Serial.print("Soil pH: ");
+    Serial.println((float)soilPH / 10.0);
+    Serial.print("Nitrogen: ");
+    Serial.println(nitrogen);
+    Serial.print("Phosphorus: ");
+    Serial.println(phosphorus);
+    Serial.print("Potassium: ");
+    Serial.println(potassium);
+    Serial.println("\n\n");
+
+  if (currentMillis - previousMillis >= clearInterval) {
+    previousMillis = currentMillis; 
+    lcd.clear();
+
+  if(WiFi.status() != WL_CONNECTED) {
+    lcd.setCursor(10,3);
+    lcd.print("Connecting");
+  }else{
+
+    lcd.setCursor(10,3);
+    lcd.print("Wifi");
+
+  }
+    
+  }
+  lcd.setCursor(0,0);
+  lcd.print("T : ");
+  lcd.setCursor(4,0);
+  lcd.print((float)soilTemperature / 10.0);
+  lcd.setCursor(8,0);
+  lcd.print("C");
+
+  lcd.setCursor(10,0);
+  lcd.print("H : ");
+  lcd.setCursor(14,0);
+  lcd.print((float)soilHumidity / 10.0);
+  lcd.setCursor(18,0);
+  lcd.print("%");
+
+  lcd.setCursor(0,1);
+  lcd.print("C : ");
+  lcd.setCursor(4,1);
+  lcd.print(soilConductivity);
+
+  lcd.setCursor(10,1);
+  lcd.print("M : ");
+  lcd.setCursor(14,1);
+  lcd.print((float)soilHumidity / 10.0);
+  lcd.setCursor(18,1);
+  lcd.print("%");
+
+  lcd.setCursor(0,2);
+  lcd.print("N : ");
+  lcd.setCursor(4,2);
+  lcd.print(nitrogen);
+
+  lcd.setCursor(10,2);
+  lcd.print("P : ");
+  lcd.setCursor(14,2);
+  lcd.print(phosphorus);
+
+  lcd.setCursor(0,3);
+  lcd.print("K : ");
+  lcd.setCursor(4,3);
+  lcd.print(potassium);
+
+  lcd.setCursor(10,1);
+  lcd.print("PH : ");
+  lcd.setCursor(15,1);
+  lcd.print((float)soilPH / 10.0);
+
+  
+  }
+  server.handleClient();
+  delay(1000);
+  
+}
+
+
+rm -rf node_modules package-lock.json bun.lockb
