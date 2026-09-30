@@ -1,0 +1,242 @@
+{
+ "generated": "2026-09-30",
+ "source": "WFP VAM Food Prices via HDX (CC BY-IGO); wholesale, median of last 12 months",
+ "unit": "TZS/kg",
+ "periodStart": "2025-08-01",
+ "periodEnd": "2026-08-15",
+ "national": {
+  "maize": 817,
+  "finger-millet": 2500,
+  "irish-potato": 975,
+  "rice": 2492,
+  "sorghum": 1500,
+  "wheat": 1900,
+  "beans": 2616
+ },
+ "byRegion": {
+  "arusha": {
+   "maize": 727,
+   "finger-millet": 1875,
+   "irish-potato": 938,
+   "rice": 2950,
+   "sorghum": 937,
+   "wheat": 1352,
+   "beans": 2060
+  },
+  "dar-es-salaam": {
+   "maize": 1070,
+   "finger-millet": 2850,
+   "irish-potato": 825,
+   "rice": 2650,
+   "sorghum": 1250,
+   "wheat": 1625,
+   "beans": 3300
+  },
+  "dodoma": {
+   "maize": 850,
+   "finger-millet": 2600,
+   "irish-potato": 675,
+   "rice": 2750,
+   "sorghum": 1100,
+   "wheat": 1575,
+   "beans": 2650
+  },
+  "geita": {
+   "maize": 950,
+   "finger-millet": 1800,
+   "irish-potato": 1000,
+   "rice": 2200,
+   "sorghum": 1500,
+   "wheat": 1800,
+   "beans": 3200
+  },
+  "iringa": {
+   "maize": 587,
+   "finger-millet": 2340,
+   "irish-potato": 677,
+   "rice": 2477,
+   "sorghum": 1562,
+   "wheat": 1839,
+   "beans": 2360
+  },
+  "kagera": {
+   "maize": 876,
+   "finger-millet": 2600,
+   "irish-potato": 848,
+   "rice": 2345,
+   "sorghum": 1562,
+   "wheat": 1900,
+   "beans": 1912
+  },
+  "katavi": {
+   "maize": 800,
+   "finger-millet": 3000,
+   "irish-potato": 1500,
+   "rice": 2500,
+   "sorghum": 700,
+   "wheat": 3000,
+   "beans": 3000
+  },
+  "kigoma": {
+   "maize": 722,
+   "finger-millet": 2045,
+   "irish-potato": 965,
+   "rice": 2585,
+   "sorghum": 1223,
+   "wheat": 2036,
+   "beans": 2018
+  },
+  "kilimanjaro": {
+   "maize": 804,
+   "finger-millet": 2825,
+   "irish-potato": 1050,
+   "rice": 3400,
+   "sorghum": 1792,
+   "wheat": 1790,
+   "beans": 2665
+  },
+  "lindi": {
+   "maize": 886,
+   "finger-millet": 3000,
+   "irish-potato": 960,
+   "rice": 2914,
+   "sorghum": 2250,
+   "wheat": 3275,
+   "beans": 2800
+  },
+  "manyara": {
+   "maize": 720,
+   "finger-millet": 1450,
+   "irish-potato": 1050,
+   "rice": 2350,
+   "sorghum": 1100,
+   "wheat": 1400,
+   "beans": 2250
+  },
+  "mara": {
+   "maize": 875,
+   "finger-millet": 3100,
+   "irish-potato": 1450,
+   "rice": 1950,
+   "sorghum": 2300,
+   "wheat": 2500,
+   "beans": 2900
+  },
+  "mbeya": {
+   "maize": 584,
+   "finger-millet": 2788,
+   "irish-potato": 979,
+   "rice": 2500,
+   "sorghum": 2400,
+   "wheat": 2100,
+   "beans": 2715
+  },
+  "morogoro": {
+   "maize": 730,
+   "finger-millet": 1650,
+   "irish-potato": 727,
+   "rice": 2550,
+   "sorghum": 1500,
+   "wheat": 1636,
+   "beans": 2250
+  },
+  "mtwara": {
+   "maize": 570,
+   "finger-millet": 2000,
+   "irish-potato": 1000,
+   "rice": 2300,
+   "sorghum": 2000,
+   "wheat": 3000,
+   "beans": 2700
+  },
+  "mwanza": {
+   "maize": 926,
+   "finger-millet": 2520,
+   "irish-potato": 1045,
+   "rice": 2530,
+   "sorghum": 1465,
+   "beans": 2300,
+   "wheat": 2000
+  },
+  "njombe": {
+   "maize": 570,
+   "finger-millet": 1625,
+   "irish-potato": 1100,
+   "rice": 2375,
+   "sorghum": 850,
+   "wheat": 1550,
+   "beans": 2150
+  },
+  "pwani": {
+   "maize": 900,
+   "finger-millet": 2150,
+   "irish-potato": 1450,
+   "rice": 2100,
+   "sorghum": 1900,
+   "wheat": 2300,
+   "beans": 2900
+  },
+  "rukwa": {
+   "maize": 595,
+   "finger-millet": 1604,
+   "irish-potato": 725,
+   "rice": 2150,
+   "wheat": 1450,
+   "beans": 2240
+  },
+  "ruvuma": {
+   "maize": 572,
+   "finger-millet": 2150,
+   "irish-potato": 793,
+   "rice": 2700,
+   "sorghum": 650,
+   "beans": 2140,
+   "wheat": 2483
+  },
+  "shinyanga": {
+   "maize": 725,
+   "finger-millet": 2450,
+   "irish-potato": 850,
+   "rice": 2100,
+   "sorghum": 1450,
+   "wheat": 2000,
+   "beans": 2100
+  },
+  "simiyu": {
+   "maize": 892,
+   "finger-millet": 2750,
+   "irish-potato": 1450,
+   "rice": 2215,
+   "sorghum": 2250,
+   "wheat": 2300,
+   "beans": 2900
+  },
+  "singida": {
+   "maize": 817,
+   "finger-millet": 2500,
+   "irish-potato": 1045,
+   "rice": 2691,
+   "sorghum": 2000,
+   "wheat": 2000,
+   "beans": 2550
+  },
+  "tabora": {
+   "maize": 739,
+   "finger-millet": 2150,
+   "irish-potato": 950,
+   "rice": 2200,
+   "sorghum": 1850,
+   "wheat": 2083,
+   "beans": 2154
+  },
+  "tanga": {
+   "maize": 1400,
+   "finger-millet": 3398,
+   "irish-potato": 1125,
+   "rice": 2536,
+   "sorghum": 1367,
+   "wheat": 2000,
+   "beans": 2217
+  }
+ }
+}
