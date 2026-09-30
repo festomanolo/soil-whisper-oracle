@@ -1,1 +1,0 @@
-Verifying GitHub badge trigger and PR merge API
