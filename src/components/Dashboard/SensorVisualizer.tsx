@@ -8,7 +8,7 @@ const SensorVisualizer = () => {
   const { isConnected, lastUpdate, refreshData, connectToSensor } = useSensorData();
 
   return (
-    <div className="card-glass p-4 animate-fade-in-up">
+    <div className="card-glass rounded-[28px] backdrop-blur-md shadow-2xl p-4 animate-fade-in-up">
       <div className="flex items-center justify-between">
         <div className="flex items-center space-x-2">
           {isConnected ? (
@@ -73,7 +73,7 @@ const SensorVisualizer = () => {
             <div className="text-xs text-muted-foreground">Battery</div>
             <div className="flex items-center mt-1">
               <div className="w-full bg-muted rounded-full h-2">
-                <div className="h-full rounded-full bg-blue-500 w-2/3"></div>
+                <div className="h-full rounded-full bg-emerald-500 w-2/3"></div>
               </div>
               <span className="ml-2 text-xs">67%</span>
             </div>
