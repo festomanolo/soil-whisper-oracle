@@ -1,12 +1,12 @@
 
 {
-  "name": "AgriOracle - Soil Whisperer",
-  "short_name": "AgriOracle",
-  "description": "AI-powered soil analysis and crop recommendations",
+  "name": "Mbolea Sahihi",
+  "short_name": "Mbolea Sahihi",
+  "description": "Soil testing, crop choice and fertilizer plans for Tanzanian farmers",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#1d1915",
-  "theme_color": "#22c55e",
+  "background_color": "#0b2416",
+  "theme_color": "#15803d",
   "orientation": "portrait",
   "categories": ["agriculture", "productivity", "utilities"],
   "icons": [
