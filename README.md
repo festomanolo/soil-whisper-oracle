@@ -1,3 +1,6 @@
+**Use your preferred IDE**
+
+If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
 
 The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
 
@@ -47,3 +50,17 @@ This project is built with:
 - shadcn-ui
 - Tailwind CSS
 
+
+## Mbolea Sahihi – Tanzanian data
+
+The fertilizer planner (`/mbolea`) and crop ranking (`/recommendations`) run fully offline on bundled data in `src/data/tz/`:
+
+| File | Source |
+|---|---|
+| `regions.json` | NASA POWER 30-yr climatology + ISRIC SoilGrids topsoil for 28 regions |
+| `market-prices.json` | WFP VAM wholesale prices via HDX (last 12 months) |
+| `crops.ts` | FAO ECOCROP limits, Ministry of Agriculture R&D fertilizer rates, TARI |
+| `fertilizers.ts` | TFRA indicative prices 2024/25 (editable in the app) |
+
+Refresh the scraped data with `python3 scripts/tz-data/fetch_tz_data.py` (stdlib only; the soil step takes ~10 min).
+After adding native plugins run `npx cap sync android` before building the APK.
