@@ -1,0 +1,16 @@
+# Specification 07: Build Recentanalysis.Tsx Historical Soil Test Archive Page
+
+**Scope**: `calendar`  
+**Stage**: `14/16`  
+**Component**: Mbolea Sahihi Architecture  
+
+## Overview
+Technical specification and implementation details for build RecentAnalysis.tsx historical soil test archive page.
+
+## Requirements & Invariants
+- Enforce strict type safety and agricultural accuracy for calendar.
+- Support offline execution without cloud dependency.
+- Validate inputs against real Tanzanian regional datasets.
+
+## Verification
+- Automated verification and unit assertions for build RecentAnalysis.tsx historical soil test archive page.
