@@ -1,0 +1,16 @@
+# Specification 27: Add Responsive Card Layout Adapting Cleanly To Small Phone Screens
+
+**Scope**: `i18n-mbolea`  
+**Stage**: `11/16`  
+**Component**: Mbolea Sahihi Architecture  
+
+## Overview
+Technical specification and implementation details for add responsive card layout adapting cleanly to small phone screens.
+
+## Requirements & Invariants
+- Enforce strict type safety and agricultural accuracy for i18n-mbolea.
+- Support offline execution without cloud dependency.
+- Validate inputs against real Tanzanian regional datasets.
+
+## Verification
+- Automated verification and unit assertions for add responsive card layout adapting cleanly to small phone screens.
