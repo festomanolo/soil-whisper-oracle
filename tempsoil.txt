@@ -1,0 +1,182 @@
+#include <SoftwareSerial.h>
+#include <LiquidCrystal_I2C.h>
+#include <ESP8266WiFi.h>
+#include <ESP8266WebServer.h>
+#include <Wire.h>
+
+SoftwareSerial mySerial(D5, D6);
+LiquidCrystal_I2C lcd(0x27, 20, 4);
+
+const char *ssid = "SOIL";
+const char *pass = "123456789p";
+
+#define RE D3
+#define DE D4
+
+ESP8266WebServer server(80);
+
+// Variables to hold the latest sensor readings
+float lastSoilTemperature = 0;
+float lastSoilHumidity = 0;
+int lastSoilConductivity = 0;
+float lastSoilPH = 0;
+int lastNitrogen = 0;
+int lastPhosphorus = 0;
+int lastPotassium = 0;
+
+// Variables for LCD display management
+unsigned long lastDisplayUpdate = 0;
+const unsigned long displayUpdateInterval = 3000; // Update display every 3 seconds
+int currentDisplayPage = 0;
+const int totalDisplayPages = 3;
+
+void handleRoot() {
+  // Add CORS headers
+  server.sendHeader("Access-Control-Allow-Origin", "*");
+  server.sendHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
+  server.sendHeader("Access-Control-Allow-Headers", "Content-Type");
+  
+  String json = "{";
+  json += "\"temperature\":" + String(lastSoilTemperature, 1) + ",";
+  json += "\"humidity\":" + String(lastSoilHumidity, 1) + ",";
+  json += "\"conductivity\":" + String(lastSoilConductivity) + ",";
+  json += "\"ph\":" + String(lastSoilPH, 1) + ",";
+  json += "\"nitrogen\":" + String(lastNitrogen) + ",";
+  json += "\"phosphorus\":" + String(lastPhosphorus) + ",";
+  json += "\"potassium\":" + String(lastPotassium);
+  json += "}";
+  server.send(200, "application/json", json);
+}
+
+void displayPage1() {
+  // Page 1: Temperature and Humidity
+  lcd.clear();
+  lcd.setCursor(0, 0);
+  lcd.print("SOIL SENSOR DATA");
+  lcd.setCursor(0, 1);
+  lcd.print("Temp: ");
+  lcd.print(lastSoilTemperature, 1);
+  lcd.print("C");
+  lcd.setCursor(0, 2);
+  lcd.print("Humidity: ");
+  lcd.print(lastSoilHumidity, 1);
+  lcd.print("%");
+  lcd.setCursor(0, 3);
+  lcd.print("Page 1/3");
+}
+
+void displayPage2() {
+  // Page 2: pH and Conductivity
+  lcd.clear();
+  lcd.setCursor(0, 0);
+  lcd.print("SOIL PROPERTIES");
+  lcd.setCursor(0, 1);
+  lcd.print("pH: ");
+  lcd.print(lastSoilPH, 1);
+  lcd.setCursor(0, 2);
+  lcd.print("Conductivity: ");
+  lcd.print(lastSoilConductivity);
+  lcd.print(" uS/cm");
+  lcd.setCursor(0, 3);
+  lcd.print("Page 2/3");
+}
+
+void displayPage3() {
+  // Page 3: NPK Values
+  lcd.clear();
+  lcd.setCursor(0, 0);
+  lcd.print("NUTRIENT LEVELS");
+  lcd.setCursor(0, 1);
+  lcd.print("N: ");
+  lcd.print(lastNitrogen);
+  lcd.print(" mg/kg");
+  lcd.setCursor(0, 2);
+  lcd.print("P: ");
+  lcd.print(lastPhosphorus);
+  lcd.print(" K: ");
+  lcd.print(lastPotassium);
+  lcd.setCursor(0, 3);
+  lcd.print("Page 3/3");
+}
+
+void updateDisplay() {
+  if (millis() - lastDisplayUpdate >= displayUpdateInterval) {
+    switch (currentDisplayPage) {
+      case 0:
+        displayPage1();
+        break;
+      case 1:
+        displayPage2();
+        break;
+      case 2:
+        displayPage3();
+        break;
+    }
+
+    currentDisplayPage = (currentDisplayPage + 1) % totalDisplayPages;
+    lastDisplayUpdate = millis();
+  }
+}
+
+void setup() {
+  Serial.begin(9600);
+  mySerial.begin(4800);
+  Wire.begin();
+
+  pinMode(DE, OUTPUT);
+  pinMode(RE, OUTPUT);
+
+  lcd.init();
+  lcd.backlight();
+  
+  // Welcome message
+  lcd.setCursor(7, 0);
+  lcd.print("WELCOME");
+  lcd.setCursor(0, 2);
+  lcd.print("SOIL DATA EXTRACTION");
+  delay(3000);
+  lcd.clear();
+
+  WiFi.begin(ssid, pass);
+  while (WiFi.status() != WL_CONNECTED) {
+    delay(500);
+    lcd.setCursor(10, 3);
+    lcd.print("Connecting");
+  }
+  lcd.setCursor(10, 3);
+  lcd.print("Wifi");
+
+  server.on("/", handleRoot);
+  server.begin();
+  
+  // Initialize display
+  displayPage1();
+}
+
+void loop() {
+  byte queryData[]{0x01, 0x03, 0x00, 0x00, 0x00, 0x07, 0x04, 0x08};
+  byte receivedData[19];
+
+  digitalWrite(DE, HIGH);
+  digitalWrite(RE, HIGH);
+  mySerial.write(queryData, sizeof(queryData));
+  digitalWrite(DE, LOW);
+  digitalWrite(RE, LOW);
+  delay(1000);
+
+  if (mySerial.available() >= sizeof(receivedData)) {
+    mySerial.readBytes(receivedData, sizeof(receivedData));
+    lastSoilHumidity = (float)((receivedData[3] << 8) | receivedData[4]) / 10.0;
+    lastSoilTemperature = (float)((receivedData[5] << 8) | receivedData[6]) / 10.0;
+    lastSoilConductivity = (receivedData[7] << 8) | receivedData[8];
+    lastSoilPH = (float)((receivedData[9] << 8) | receivedData[10]) / 10.0;
+    lastNitrogen = (receivedData[11] << 8) | receivedData[12];
+    lastPhosphorus = (receivedData[13] << 8) | receivedData[14];
+    lastPotassium = (receivedData[15] << 8) | receivedData[16];
+    
+    // Update display with new data
+    updateDisplay();
+  }
+
+  server.handleClient();
+}
