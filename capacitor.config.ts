@@ -1,14 +1,14 @@
-
 import { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'app.lovable.soilwhispereroracle',
-  appName: 'AgriOracle - Soil Whisperer',
+  appId: 'app.manolo.soilwhispereroracle',
+  appName: 'Mbolea Sahihi',
   webDir: 'dist',
-  server: {
-    url: 'https://2075fd8e-bb7b-4074-91b5-99fe88577e65.lovableproject.com?forceHideBadge=true',
-    cleartext: true
-  },
+  // Comment out the server configuration to use local build
+  // server: {
+  //   url: 'https://2075fd8e-bb7b-4074-91b5-99fe88577e65.manoloproject.com?forceHideBadge=true',
+  //   cleartext: true
+  // },
   android: {
     buildOptions: {
       keystorePath: undefined,
@@ -22,27 +22,24 @@ const config: CapacitorConfig = {
     allowMixedContent: true,
     captureInput: true,
     webContentsDebuggingEnabled: false,
-    appendUserAgent: 'AgriOracle/1.0',
+    appendUserAgent: 'MboleaSahihi/1.0',
     overrideUserAgent: undefined,
-    backgroundColor: '#1d1915',
+    backgroundColor: '#0b2416',
     useLegacyBridge: false,
     flavor: 'main',
-    webSecurity: false,
-    // Optimize for faster loading
-    loggingBehavior: 'none',
-    mixedContentMode: 'always_allow'
+    webSecurity: false
   },
   plugins: {
     SplashScreen: {
-      launchShowDuration: 1500, // Reduced splash time
-      backgroundColor: '#1d1915',
+      launchShowDuration: 2000,
+      backgroundColor: '#0b2416',
       showSpinner: false,
       androidSpinnerStyle: 'large',
       spinnerColor: '#22c55e'
     },
     StatusBar: {
       style: 'dark',
-      backgroundColor: '#1d1915'
+      backgroundColor: '#0b2416'
     },
     Keyboard: {
       resize: 'body',
